@@ -1,0 +1,14 @@
+*.csv
+*.npy
+*.xlsx
+*.pth
+*.pt
+*.txt
+*.ps1
+
+/PaperWriting
+/pythonSIFT
+/result
+/TrainedModel
+/__pycache__
+/.vscode
