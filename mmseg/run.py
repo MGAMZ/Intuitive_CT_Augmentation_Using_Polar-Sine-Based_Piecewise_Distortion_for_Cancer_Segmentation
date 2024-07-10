@@ -67,12 +67,18 @@ def runner(args):
             print(f"{args.exp_name} 第{round}次 {model} 实验完成")
 
 
+# DEFAULT_MODELS = ["ConvNext", "MAE", "Poolformer", "Resnet50", "Segformer", "SegNext", "SwinTransformerV2"]
+DEFAULT_MODELS        = ["MAE", "MedNext", "Resnet50", "Segformer", "SegNext", "SwinUmamba"]
+DEFAULT_WORK_DIR      = os.path.join(os.environ['HOME'], 'mm_work_dirs_Distortion') if os.name=='posix' else './work_dirs'
+DEFAULT_TEST_WORK_DIR = os.path.join(os.environ['HOME'], 'mm_test_dirs_Distortion') if os.name=='posix' else './test_dirs'
+
+
 def parase_args():
     parser = argparse.ArgumentParser(description="MMSEG")
     parser.add_argument("exp_name", type=str, nargs="+", help="实验名")
-    parser.add_argument("--models", type=str, nargs="+", default=["ConvNext", "MAE", "Poolformer", "Resnet50", "Segformer", "SegNext", "SwinTransformerV2"])
+    parser.add_argument("--models", type=str, nargs="+", default=DEFAULT_MODELS)
     parser.add_argument("--exp_trials", type=int, default=3, help="每个实验重复次数")
-    parser.add_argument("--work_dir_root", type=str, default="work_dirs", help="存储实验结果的根目录")
+    parser.add_argument("--work_dir_root", type=str, default=DEFAULT_WORK_DIR, help="存储实验结果的根目录")
     parser.add_argument("--config_root", type=str, default="mgam_cfg", help="存储配置文件的根目录")
     args = parser.parse_args()
     return args

@@ -1,12 +1,12 @@
 # mmsegmentation
-from mmseg.CQK_Med import CQK_2023_Med
-from mmseg.CQK_Med import LMDB_MP_Proxy
-from mmseg.CQK_Med import LoadCTImage
-from mmseg.CQK_Med import ScanTableRemover
-from mmseg.CQK_Med import LoadCTLabel
-from mmseg.CQK_Med import RangeClipNorm
-from mmseg.CQK_Med import Distortion
-from mmseg.CQK_Med import CTSegVisualizationHook
+from mgamdata.CTGastricCancer2023 import GastricCancer_2023
+from mgamdata.CTGastricCancer2023 import LMDB_MP_Proxy
+from mgamdata.CTGastricCancer2023 import LoadCTImage
+from mgamdata.CTGastricCancer2023 import LoadCTLabel
+from mgamdata.CTGastricCancer2023 import CTSegVisualizationHook
+from mgamdata.DistortionAugment import ScanTableRemover
+from mgamdata.DistortionAugment import Distortion
+from mgamdata.DistortionAugment import RangeClipNorm
 from mmseg.datasets.transforms import PackSegInputs
 from mmseg.datasets.transforms import Resize
 from mmseg.datasets.transforms import RandomRotate
@@ -19,7 +19,7 @@ from mmseg.evaluation.metrics import IoUMetric
 from mmengine.runner import IterBasedTrainLoop
 from mmengine.runner import ValLoop
 from mmengine.runner import TestLoop
-from mmengine.dataset import InfiniteSampler
+from mmengine.dataset import InfiniteSampler1
 from mmengine.dataset import DefaultSampler
 from mmengine.optim import AmpOptimWrapper
 from mmengine.optim import OptimWrapper
@@ -32,6 +32,7 @@ from mmengine.hooks.checkpoint_hook import CheckpointHook
 from mmengine.hooks import DistSamplerSeedHook
 from mmengine.visualization import LocalVisBackend
 from mmengine.visualization import TensorboardVisBackend
+from mmengine.dataset.sampler import InfiniteSampler
 
 # Neural Network
 from torch.optim import AdamW
@@ -44,32 +45,24 @@ from torch.nn.modules.normalization import GroupNorm
 
 
 debug=False
-
 use_AMP = True
-compile = False
+compile = True if not debug else False
 
-data_root = '../2023_Med_CQK'
-meta_ckpt = '../2023_Med_CQK/V3_2024-03-16_14-59-01.pickle'
+data_root = '/mnt/e/mgam_ct/2023_Med_CQK'
+meta_ckpt = '/mnt/e/mgam_ct/2023_Med_CQK/V3_2024-03-16_14-59-01.pickle'
 use_lmdb = True
-lmdb_backend_param = {
+lmdb_backend_proxy = {
 	"dataset_root": data_root,
-	"lmdb_path": r"../2023_Med_CQK/lmdb_database",
+	"lmdb_path": r"/mnt/e/mgam_ct/2023_Med_CQK/lmdb_database",
 	"mode": "normal",
-}
+} if use_lmdb else None
 batch_size = 8
-workers = 0 if debug else 20
+workers = 0 if debug else 8
 data_preprocessor_normalize=False
 mean, std = 561.54, 486.59              # before clip to (0,4095): (10.87, 1138.37), after: (561.54, 486.59)
 source_img_shape = (512,512)
 crop_size = (256,256)
-val_interval = 500 if not debug else 1
-
-
-lmdb_backend_proxy = dict(
-	type=LMDB_MP_Proxy,
-	name="LMDB_MP_Proxy",
-	lmdb_args=lmdb_backend_param,
-) if use_lmdb else None
+val_interval = 1000 if not debug else 1
 
 
 train_dataloader = dict(

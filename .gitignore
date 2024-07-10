@@ -5,8 +5,11 @@
 *.pt
 *.txt
 *.ps1
+*.7z
+*.ipynb
 
 /PaperWriting
+/DrawFigure
 /pythonSIFT
 /result
 /TrainedModel
