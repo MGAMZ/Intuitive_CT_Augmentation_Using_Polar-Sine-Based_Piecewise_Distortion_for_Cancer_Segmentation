@@ -31,7 +31,7 @@
 
 ## Graphical Abstact
 
-![GraphicalAbstract](./PaperWriting/5.LatexRefined/TexProject/Figures/Graphical Abstract.png)
+![GraphicalAbstract](./PaperWriting/5.LatexRefined/TexProject/Figures/Graphical%20Abstract.png)
 
 ## Abstract
 
@@ -39,7 +39,7 @@ Most data-driven models for CT image analysis rely on universal augmentations to
 
 ## Prerequisites
 
-Please see `./requirement/*`.
+Please see `requirement.txt`.
 
 - Ubuntu 22.02 on WSL2
 - Ampere or above GPU
