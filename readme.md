@@ -1,4 +1,4 @@
-# Intuitive CT Augmentation Using Polar-Sine-Based Piecewise Distortion for Cancer Segmentation
+# Intuitive Axial Augmentation Using Polar-Sine-Based Piecewise Distortion for Medical Slice-Wise Segmentation
 
 *Preview* Implementation of the paper
 
@@ -35,7 +35,7 @@
 
 ## Abstract
 
-Most data-driven models for CT image analysis rely on universal augmentations to improve performance. Experimental evidence has confirmed their effectiveness, but the unclear mechanism underlying them poses a barrier to the widespread acceptance and trust in such methods within the medical community. We revisit and acknowledge the unique characteristics of CT images apart from traditional digital images, and consequently, proposed a CT-specific augmentation algorithm that is more elastic and aligns well with CT scan procedure. The method performs piecewise affine with sinusoidal distorted ray according to radius on polar coordinates, thus simulating uncertain postures of human lying flat on CT scan table. Our method could generate human visceral distribution without affecting the fundamental relative position on axial plane. Two non-adaptive algorithms, namely Meta-based Scan Table Removal and Similarity-Guided Parameter Search, are introduced to bolster robustness of our augmentation method. Experiments show our method improves accuracy across multiple famous segmentation frameworks without requiring more data samples. Our preview code is available in: https://github.com/MGAMZ/PSBPD.
+Most data-driven models for medical image analysis rely on universal augmentations to improve performance. Experimental evidence has confirmed their effectiveness, but the unclear mechanism underlying them poses a barrier to the widespread acceptance and trust in such methods within the medical community. We revisit and acknowledge the unique characteristics of medical images apart from traditional digital images, and consequently, proposed a medical-specific augmentation algorithm that is more elastic and aligns well with radiology scan procedure. The method performs piecewise affine with sinusoidal distorted ray according to radius on polar coordinates, thus simulating uncertain postures of human lying flat on the scanning table. Our method could generate human visceral distribution without affecting the fundamental relative position on axial plane. Two non-adaptive algorithms, namely Meta-based Scan Table Removal and Similarity-Guided Parameter Search, are introduced to bolster robustness of our augmentation method. Experiments show our method improves accuracy across multiple famous segmentation frameworks without requiring more data samples.
 
 ## Prerequisites
 
